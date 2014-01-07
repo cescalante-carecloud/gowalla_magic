@@ -1,8 +1,5 @@
-#load_nodes.rb
-#populates csv files for nodes
-
 #pathtobatch = '../batch-import/gowalla/'
-pathtobatch = ""
+pathtobatch = '../../batch-import/sample2/'
 pathtoinput = ""
 
 #make sure to make the nodes first, followed by the relationships
@@ -42,6 +39,7 @@ File.open(pathtoinput+"edges.txt", "r").each do |record|
     count+=1
 end
   
+  
 File.new(pathtobatch+'user_nodes.csv',File::CREAT)
 user_nodes_csv= File.open(pathtobatch+'user_nodes.csv', 'w+')
 user_nodes_csv.puts"user_id:int:user_id|l:label"  #header
@@ -54,7 +52,7 @@ user_nodes_csv.puts"user_id:int:user_id|l:label"  #header
 
 File.new(pathtobatch+'location_nodes.csv',File::CREAT)
 loc_nodes_csv= File.open(pathtobatch+'location_nodes.csv', 'w+')
-loc_nodes_csv.puts"location_id:int:location_id|lat:int|long:int|l:label"  #header
+loc_nodes_csv.puts"location_id:int:location_id|lat:float|long:float|l:label"  #header
 
     locs.each do |key, value|
       if key != nil
@@ -64,12 +62,12 @@ loc_nodes_csv.puts"location_id:int:location_id|lat:int|long:int|l:label"  #heade
 
 File.new(pathtobatch+'user_loc_rels.csv',File::CREAT)
 user_loc_rels_csv= File.open(pathtobatch+'user_loc_rels.csv', 'w+')
-user_loc_rels_csv.puts"user_id:int:user_id|location_id:int:location_id|checked_in"  #header
+user_loc_rels_csv.puts"user_id:int:user_id|location_id:int:location_id|checked_in|time"  #header
 
     users_loc_rels.each do |key, value|
       if key != nil
         #loc_nodes_csv.puts"#{key}#{value[:lat]}|#{value[:long]}|location" #puts "#{key}: #{value}"
-        user_loc_rels_csv.puts"#{value[:user_id]}|#{value[:location_id]}|#{value[:date]}" #puts "#{key}: #{value}"
+        user_loc_rels_csv.puts"#{value[:user_id]}|#{value[:location_id]}|checked_in|#{value[:date]}" #puts "#{key}: #{value}"
       end
     end
     

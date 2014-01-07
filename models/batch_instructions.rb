@@ -2,16 +2,16 @@
 #updates batch-import/sample/import.sh and batch-import/sample/batch.import files
 require 'csv'
 
-pathtobatch = '../batch-import/sample/'
+pathtobatch = '../batch-import/sample2/'
 
 File.new(pathtobatch+'import.sh',File::CREAT)
 import_instructions= File.open(pathtobatch+'import.sh', 'w+')
 
 import_instructions.puts"echo \"Importing stuff\"
 mvn test-compile exec:java -Dexec.mainClass=\"org.neo4j.batchimport.Importer\" \
- -Dexec.args=\"sample/batch.properties ../NEO4J_HOME/data/graph.db 
- sample/user_nodes.csv,sample/specialty_nodes.csv,sample/specialty_type_nodes.csv,sample/physician_nodes.csv
- sample/referral_rels.csv,sample/user_connection_rels.csv,sample/s_s_t_rels.csv,sample/user_specialty_rels.csv,sample/physician_specialty_rels.csv,sample/physician_user_rels.csv\"
+ -Dexec.args=\"sample2/batch.properties ../NEO4J_HOME/data/graph.db 
+ sample2/location_nodes.csv,sample2/user_nodes.csv
+ sample2/user_loc_rels.csv,user_user_rels.csv\"
 "
 
 File.new(pathtobatch+'batch.properties',File::CREAT)
@@ -33,6 +33,4 @@ batch_import.keep_db=false
 
 batch_import.node_index.user_id=exact
 batch_import.node_index.location_id=exact
-batch_import.node_index.specialty_id=exact
-batch_import.node_index.specialty_type_id=exact
 "
