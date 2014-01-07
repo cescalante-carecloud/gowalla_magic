@@ -1,8 +1,8 @@
 #batch_instructions.rb
 #updates batch-import/sample/import.sh and batch-import/sample/batch.import files
-require 'csv'
+#data is from here: http://snap.stanford.edu/data/loc-gowalla.html
 
-pathtobatch = '../batch-import/sample2/'
+pathtobatch = '../../batch-import/sample2/'
 
 File.new(pathtobatch+'import.sh',File::CREAT)
 import_instructions= File.open(pathtobatch+'import.sh', 'w+')
@@ -11,7 +11,7 @@ import_instructions.puts"echo \"Importing stuff\"
 mvn test-compile exec:java -Dexec.mainClass=\"org.neo4j.batchimport.Importer\" \
  -Dexec.args=\"sample2/batch.properties ../NEO4J_HOME/data/graph.db 
  sample2/location_nodes.csv,sample2/user_nodes.csv
- sample2/user_loc_rels.csv,user_user_rels.csv\"
+ sample2/user_loc_rels.csv,sample2/user_user_rels.csv\"
 "
 
 File.new(pathtobatch+'batch.properties',File::CREAT)
