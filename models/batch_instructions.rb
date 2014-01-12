@@ -33,4 +33,6 @@ batch_import.keep_db=false
 
 batch_import.node_index.user_id=exact
 batch_import.node_index.location_id=exact
+batch_import.node_index.day_id=exact
+batch_import.node_index.event_id=exact
 "
