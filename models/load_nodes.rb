@@ -1,4 +1,7 @@
 require 'Date'
+
+next i am going to update batch_instructions.rb
+
 #pathtobatch = '../batch-import/gowalla/'
 pathtobatch = ''
 pathtoinput = ""
@@ -13,7 +16,7 @@ user_user_rels = Hash.new(0)
 user_event_rels = Hash.new(0)
 event_loc_rels = Hash.new(0)
 event_day_rels = Hash.new(0)
-users_loc_rels = Hash.new(0) #getting rid of this
+#users_loc_rels = Hash.new(0) #getting rid of this
 
 event_nodes_csv=File.open(pathtobatch+'event_nodes.csv', 'w+')
 day_nodes_csv=File.open(pathtobatch+'day_nodes.csv', 'w+')
@@ -42,8 +45,7 @@ File.open(pathtoinput+"checkins.txt", "r").each do |record|
     user_id = data[0]
     users[data[0]] = true
     locs[data[4]] = {:lat => data[2], :long => data[3]}
-    users_loc_rels[event_id] = {:user_id => data[0], :location_id => data[4], :date => [data[1]]}
-    user_event_rels[event_id] = :user_id
+    #users_loc_rels[event_id] = {:user_id => data[0], :location_id => data[4], :date => [data[1]]}
     event_day_rels_csv.puts"#{event_id}|#{day_id}|when"
     event_loc_rels_csv.puts"#{event_id}|#{location_id}|where"
     user_event_rels_csv.puts"#{user_id}|#{event_id}|who"
@@ -86,7 +88,7 @@ loc_nodes_csv.puts"location_id:int:location_id|lat:float|long:float|l:label"  #h
         loc_nodes_csv.puts"#{key}|#{value[:lat]}|#{value[:long]}|location" #puts "#{key}: #{value}"
       end
     end
-
+=begin
 File.new(pathtobatch+'user_loc_rels.csv',File::CREAT)
 user_loc_rels_csv= File.open(pathtobatch+'user_loc_rels.csv', 'w+')
 user_loc_rels_csv.puts"user_id:int:user_id|location_id:int:location_id|checked_in|time"  #header
@@ -97,6 +99,7 @@ user_loc_rels_csv.puts"user_id:int:user_id|location_id:int:location_id|checked_i
         user_loc_rels_csv.puts"#{value[:user_id]}|#{value[:location_id]}|checked_in|#{value[:date]}" #puts "#{key}: #{value}"
       end
     end
+=end   
     
 #this is wrong, oops
 File.new(pathtobatch+'user_user_rels.csv',File::CREAT)
