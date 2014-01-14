@@ -2,10 +2,10 @@
 #updates batch-import/sample/import.sh and batch-import/sample/batch.import files
 #data is from here: http://snap.stanford.edu/data/loc-gowalla.html
 
-pathtobatch = '../../batch-import/sample2/'
+pathtobatch = '../batch-import/sample2/'
 
 File.new(pathtobatch+'import.sh',File::CREAT)
-import_instructions= File.open(pathtobatch+'import.sh', 'w+')
+import_instructions=File.open(pathtobatch+'import.sh', 'w+')
 
 import_instructions.puts"echo \"Importing stuff\"
 mvn test-compile exec:java -Dexec.mainClass=\"org.neo4j.batchimport.Importer\" \
