@@ -17,6 +17,7 @@ event_loc_rels = Hash.new(0)
 event_day_rels = Hash.new(0)
 #users_loc_rels = Hash.new(0) #getting rid of this
 
+#make this shorter
 event_nodes_csv=File.open(pathtobatch+'event_nodes.csv', 'w+')
 day_nodes_csv=File.open(pathtobatch+'day_nodes.csv', 'w+')
 event_day_rels_csv=File.open(pathtobatch+'event_day_rels.csv', 'w+')
@@ -49,11 +50,11 @@ File.open(pathtoinput+"checkins.txt", "r").each do |record|
     user_id = data[0]
     users[data[0]] = true
     locs[data[4]] = {:lat => data[2], :long => data[3]}
-    event_day_rels_csv.puts"#{event_id}|#{day_id}|when"
+    event_day_rels_csv.puts"#{event_id}|#{day_id}|when" #there are some daily duplicates, resulting in skipped rels?
     event_loc_rels_csv.puts"#{event_id}|#{location_id}|where"
     user_event_rels_csv.puts"#{user_id}|#{event_id}|who"
     event_id+=1
-    @last_day = day_id
+    @last_day = day_id #there's going to be an extra day_day rel but batch-import will ignore it
 end
 
 all_days = *(-1..@last_day-1)
@@ -84,45 +85,22 @@ File.new(pathtobatch+'user_nodes.csv',File::CREAT)
 user_nodes_csv= File.open(pathtobatch+'user_nodes.csv', 'w+')
 user_nodes_csv.puts"user_id:int:user_id|l:label"  #header
 
-    users.each do |key, value|
-      if key != nil
-        user_nodes_csv.puts"#{key}|user" #puts "#{key}: #{value}"
-      end
+users.each do |key, value|
+  if key != nil
+    user_nodes_csv.puts"#{key}|user" #puts "#{key}: #{value}"
     end
+end
 
 #have to use this method because locations are repeated in input file
 File.new(pathtobatch+'location_nodes.csv',File::CREAT)
 loc_nodes_csv= File.open(pathtobatch+'location_nodes.csv', 'w+')
 loc_nodes_csv.puts"location_id:int:location_id|lat:float|long:float|l:label"  #header
 
-    locs.each do |key, value|
-      if key != nil
-        loc_nodes_csv.puts"#{key}|#{value[:lat]}|#{value[:long]}|location" #puts "#{key}: #{value}"
-      end
-    end
-=begin
-#this is wrong, oops
-File.new(pathtobatch+'user_user_rels.csv',File::CREAT)
-user_user_rels_csv= File.open(pathtobatch+'user_user_rels.csv', 'w+')
-user_user_rels_csv.puts"user_id:int:user_id|user_id:int:user_id|friend"  #header
-
-    user_user_rels.each do |key, value|
-      if key != nil
-        user_user_rels_csv.puts"#{value[:user_1]}|#{value[:user_2]}|friend" #puts "#{key}: #{value}"
-      end
-    end
-
-File.new(pathtobatch+'user_loc_rels.csv',File::CREAT)
-user_loc_rels_csv= File.open(pathtobatch+'user_loc_rels.csv', 'w+')
-user_loc_rels_csv.puts"user_id:int:user_id|location_id:int:location_id|checked_in|time"  #header
-
-    users_loc_rels.each do |key, value|
-      if key != nil
-        #loc_nodes_csv.puts"#{key}#{value[:lat]}|#{value[:long]}|location" #puts "#{key}: #{value}"
-        user_loc_rels_csv.puts"#{value[:user_id]}|#{value[:location_id]}|checked_in|#{value[:date]}" #puts "#{key}: #{value}"
-      end
-    end
-=end   
+locs.each do |key, value|
+  if key != nil
+    loc_nodes_csv.puts"#{key}|#{value[:lat]}|#{value[:long]}|location" #puts "#{key}: #{value}"
+  end
+end 
     
 
 

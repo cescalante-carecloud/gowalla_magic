@@ -1,5 +1,5 @@
-Goal: Time Travel. 
-==================
+Gimmick: Time Travel. 
+=====================
 
 Status: 
 --------
