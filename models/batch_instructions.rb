@@ -10,8 +10,8 @@ import_instructions= File.open(pathtobatch+'import.sh', 'w+')
 import_instructions.puts"echo \"Importing stuff\"
 mvn test-compile exec:java -Dexec.mainClass=\"org.neo4j.batchimport.Importer\" \
  -Dexec.args=\"sample2/batch.properties ../NEO4J_HOME/data/graph.db 
- sample2/location_nodes.csv,sample2/user_nodes.csv
- sample2/user_loc_rels.csv,sample2/user_user_rels.csv\"
+ sample2/location_nodes.csv,sample2/user_nodes.csv,sample2/event_nodes.csv,sample2/day_nodes.csv
+ sample2/user_event_rels.csv,sample2/event_day_rels.csv,sample2/event_loc_rels.csv,sample2/user_user_rels.csv,sample2/day_day_rels.csv\"
 "
 
 File.new(pathtobatch+'batch.properties',File::CREAT)
