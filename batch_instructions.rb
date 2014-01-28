@@ -17,8 +17,9 @@ mvn test-compile exec:java -Dexec.mainClass=\"org.neo4j.batchimport.Importer\" \
 File.new(pathtobatch+'batch.properties',File::CREAT)
 batch_properties_instructions= File.open(pathtobatch+'batch.properties', 'w+')
 
+#cache type should be 'none' for the initial import
 batch_properties_instructions.puts"dump_configuration=false
-cache_type=weak
+cache_type=none
 use_memory_mapped_buffers=true
 neostore.propertystore.db.index.keys.mapped_memory=50M
 neostore.propertystore.db.index.mapped_memory=50M

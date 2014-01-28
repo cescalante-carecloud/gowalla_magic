@@ -2,7 +2,7 @@ require 'Date'
 
 #pathtobatch = '../batch-import/gowalla/'
 pathtobatch = '../batch-import/sample2/'
-pathtoinput = "./real_data/"
+pathtoinput = "./test_data/"
 
 #make sure to make the nodes first, followed by the relationships
 EPOCH = Date.parse('2010-04-27')
